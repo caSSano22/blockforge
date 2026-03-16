@@ -85,11 +85,24 @@ export default function Heroes() {
       } else {
         await requestTxSync({ chainId: CHAIN_ID, messages })
       }
-      setTxStatus({ type: 'success', msg: functionName === 'create_hero' ? '🎉 Hero created!' : '⬆️ Hero upgraded!' })
+      const msgs = {
+        'create_hero': '🎉 Hero created!',
+        'upgrade_hero': '⬆️ Hero upgraded!',
+        'enchant_hero': '✨ Enchanted! +15 HP, +5 ATK, +3 DEF!'
+      }
+      setTxStatus({ type: 'success', msg: msgs[functionName] || '✅ Done!' })
       await sleep(2000)
       await loadHero(initiaAddress)
     } catch (err) {
-      setTxStatus({ type: 'error', msg: err?.message?.slice(0, 80) || 'Transaction failed' })
+      console.error('Heroes tx error:', err)
+      const msg = err?.message || String(err) || 'Transaction failed'
+      if (msg.includes('INSUFFICIENT_RELICS') || msg.includes('0x40003')) {
+        setTxStatus({ type: 'error', msg: '❌ Not enough relics!' })
+      } else if (msg.includes('INSUFFICIENT_SHARDS') || msg.includes('0x40001')) {
+        setTxStatus({ type: 'error', msg: '❌ Not enough shards!' })
+      } else {
+        setTxStatus({ type: 'error', msg: msg.slice(0, 120) })
+      }
     } finally { setActionLoading(null) }
   }
 
