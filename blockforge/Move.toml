@@ -1,0 +1,10 @@
+[package]
+name = "blockforge"
+version = "0.0.1"
+
+[dependencies]
+InitiaStdlib = { local = "/tmp/movevm-shallow/precompile/modules/initia_stdlib" }
+
+[addresses]
+blockforge = "_"
+std = "0x1"

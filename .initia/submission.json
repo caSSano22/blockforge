@@ -1,0 +1,22 @@
+{
+  "project_name": "BlockForge",
+  "repo_url": "",
+  "commit_sha": "",
+  "rollup_chain_id": "blockforge-1",
+  "deployed_address": "0x58EF1E72E5A8C03D7EA107D65B8969AE061ADF6B",
+  "vm": "move",
+  "native_feature": "auto-signing",
+  "core_logic_path": "blockforge/sources/items.move",
+  "native_feature_frontend_path": "blockforge-frontend/src/Game.jsx",
+  "l2_interaction_tx": "2C377321A0F9D655E8BCBE2F78A8E3BBBFF54831E79D4B629060FE768973BB0C",
+  "demo_video_url": "",
+  "gas_station_address": "init1trh3uuh94rqr6l4pqlt9hztf4crp4hmtnj47je",
+  "description": "BlockForge is a full on-chain RPG battle game on Initia's Move VM. Players mine Shards, craft Relics, summon Heroes, and battle in PvP combat — all with seamless auto-signing. Features NPC-guided gameplay, 10 achievements, and a leaderboard.",
+  "contract_directory": "blockforge",
+  "frontend_directory": "blockforge-frontend",
+  "endpoints": {
+    "rpc": "http://localhost:26657",
+    "rest": "http://localhost:1317",
+    "grpc": "http://localhost:9090"
+  }
+}
