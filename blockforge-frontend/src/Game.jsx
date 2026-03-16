@@ -180,9 +180,13 @@ export default function Game() {
         <span className="recipe-text">⛏️ Mine → 1-3 💎 (30s cooldown)</span>
       </div>
 
-      {/* Crafting Recipe */}
       <div className="recipe-bar">
         <span className="recipe-text">💎 × 2 → 🔮 × 1</span>
+      </div>
+
+      {/* Disenchant Recipe */}
+      <div className="recipe-bar">
+        <span className="recipe-text">🔮 × 1 → 💎 × 3 (disenchant)</span>
       </div>
 
       {/* Action Buttons */}
@@ -209,6 +213,17 @@ export default function Game() {
             <span className="spinner" />
           ) : (
             <>🔮 Craft Relic</>
+          )}
+        </button>
+        <button
+          className="btn btn-craft"
+          onClick={() => execute('disenchant_relic')}
+          disabled={!!actionLoading || inventory.relics < 1}
+        >
+          {actionLoading === 'disenchant_relic' ? (
+            <span className="spinner" />
+          ) : (
+            <>💎 Disenchant Relic</>
           )}
         </button>
       </div>

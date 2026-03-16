@@ -18,10 +18,10 @@ const QUESTS = [
   { id: 'mine3', icon: '⛏️', name: 'Crystal Miner', desc: 'Mine shards 3 times', target: 3, action: 'mine', reward: '3-9 💎 Shards' },
   { id: 'mine5', icon: '💎', name: 'Deep Miner', desc: 'Mine shards 5 times', target: 5, action: 'mine', reward: '5-15 💎 Shards' },
   { id: 'craft2', icon: '🔮', name: 'Relic Forger', desc: 'Craft 2 relics', target: 2, action: 'craft', reward: '2 🔮 Relics' },
-  { id: 'craft3', icon: '✨', name: 'Master Crafter', desc: 'Craft 3 relics', target: 3, action: 'craft', reward: '3 🔮 Relics' },
+  { id: 'disenchant2', icon: '💫', name: 'Shard Recycler', desc: 'Disenchant 2 relics', target: 2, action: 'disenchant', reward: '6 💎 Shards' },
+  { id: 'enchant2', icon: '✨', name: 'Relic Infuser', desc: 'Enchant hero 2 times', target: 2, action: 'enchant', reward: 'Massive stat boost' },
   { id: 'upgrade2', icon: '⬆️', name: 'Power Up', desc: 'Upgrade hero 2 times', target: 2, action: 'upgrade', reward: '+2 Levels' },
-  { id: 'upgrade3', icon: '🌟', name: 'Ascension', desc: 'Upgrade hero 3 times', target: 3, action: 'upgrade', reward: '+3 Levels' },
-  { id: 'combo', icon: '🔥', name: 'Full Combo', desc: 'Mine 2 + Craft 1 + Upgrade 1', target: 4, action: 'combo', reward: 'Mixed rewards' },
+  { id: 'combo', icon: '🔥', name: 'Full Combo', desc: 'Mine 2 + Craft 1 + Enchant 1', target: 4, action: 'combo', reward: 'Mixed rewards' },
   { id: 'grind10', icon: '💪', name: 'Grindmaster', desc: 'Complete 10 total actions', target: 10, action: 'any', reward: 'Mastery!' },
 ]
 
@@ -100,6 +100,12 @@ export default function Quests() {
       } else if (actionType === 'craft') {
         await execute('items', 'craft_relic')
         setTxStatus({ type: 'success', msg: '🔮 Crafted!' })
+      } else if (actionType === 'disenchant') {
+        await execute('items', 'disenchant_relic')
+        setTxStatus({ type: 'success', msg: '💫 Disenchanted! +3 shards' })
+      } else if (actionType === 'enchant') {
+        await execute('heroes', 'enchant_hero')
+        setTxStatus({ type: 'success', msg: '✨ Enchanted! Stats boosted!' })
       } else if (actionType === 'upgrade') {
         await execute('heroes', 'upgrade_hero')
         setTxStatus({ type: 'success', msg: '⬆️ Upgraded!' })
@@ -239,7 +245,21 @@ export default function Quests() {
                       {actionLoading === 'craft' ? <><span className="spinner-sm" /> Crafting...</> : `🔮 Craft Relic (${stats.shards}/2 💎)`}
                     </button>
                   )}
-                  {(quest.action === 'upgrade' || quest.action === 'combo' || quest.action === 'any') && (
+                  {(quest.action === 'disenchant' || quest.action === 'any') && (
+                    <button className="btn btn-action quest-action-btn"
+                      onClick={() => doAction('disenchant')}
+                      disabled={!!actionLoading || stats.relics < 1}>
+                      {actionLoading === 'disenchant' ? <><span className="spinner-sm" /> Breaking...</> : `💫 Disenchant Relic (${stats.relics} 🔮)`}
+                    </button>
+                  )}
+                  {(quest.action === 'enchant' || quest.action === 'combo' || quest.action === 'any') && (
+                    <button className="btn btn-action quest-action-btn"
+                      onClick={() => doAction('enchant')}
+                      disabled={!!actionLoading || !stats.heroExists || stats.relics < 1}>
+                      {actionLoading === 'enchant' ? <><span className="spinner-sm" /> Enchanting...</> : `✨ Enchant Hero (${stats.relics} 🔮)`}
+                    </button>
+                  )}
+                  {(quest.action === 'upgrade' || quest.action === 'any') && (
                     <button className="btn btn-action quest-action-btn"
                       onClick={() => doAction('upgrade')}
                       disabled={!!actionLoading || !stats.heroExists}>

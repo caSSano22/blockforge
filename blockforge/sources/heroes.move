@@ -102,6 +102,21 @@ module blockforge::heroes {
         hero.xp = 0; // Reset XP on level up
     }
 
+    /// Enchant hero with a relic. Costs 1 relic. Boosts all stats.
+    public entry fun enchant_hero(account: &signer) acquires Hero {
+        let addr = signer::address_of(account);
+        assert!(exists<Hero>(addr), error::not_found(E_NO_HERO));
+
+        // Pay 1 relic
+        items::spend_relic(account);
+
+        let hero = borrow_global_mut<Hero>(addr);
+        hero.hp = hero.hp + 15;
+        hero.atk = hero.atk + 5;
+        hero.def = hero.def + 3;
+        hero.xp = hero.xp + 20;
+    }
+
     /// Battle another player. Deterministic using block height as seed.
     public entry fun battle(account: &signer, opponent: address) acquires Hero {
         let addr = signer::address_of(account);

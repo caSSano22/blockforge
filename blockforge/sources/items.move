@@ -85,6 +85,15 @@ module blockforge::items {
         inventory.relics = inventory.relics + 1;
     }
 
+    /// Disenchant a relic back into 3 shards (bonus shard for breaking)
+    public entry fun disenchant_relic(account: &signer) acquires Inventory {
+        ensure_inventory(account);
+        let inventory = borrow_global_mut<Inventory>(signer::address_of(account));
+        assert!(inventory.relics >= 1, error::invalid_argument(E_INSUFFICIENT_RELICS));
+        inventory.relics = inventory.relics - 1;
+        inventory.shards = inventory.shards + 3;
+    }
+
     // Friend-only: spend shards
     public(friend) fun spend_shards(account: &signer, amount: u64) acquires Inventory {
         ensure_inventory(account);

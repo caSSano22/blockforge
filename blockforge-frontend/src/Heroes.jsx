@@ -203,6 +203,16 @@ export default function Heroes() {
       )}
       {hero.level >= 20 && <div className="max-level-badge">🏆 MAX LEVEL</div>}
 
+      {/* Enchant with Relic */}
+      <button
+        className="btn btn-mint btn-full"
+        onClick={() => execute('enchant_hero')}
+        disabled={!!actionLoading}
+        style={{marginTop: '0.4rem'}}
+      >
+        {actionLoading === 'enchant_hero' ? <span className="spinner" /> : '🔮 Enchant Hero (+15 HP, +5 ATK, +3 DEF) — 1 Relic'}
+      </button>
+
       {txStatus && <div className={`tx-status ${txStatus.type}`}>{txStatus.msg}</div>}
     </div>
   )
