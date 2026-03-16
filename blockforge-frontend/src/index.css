@@ -108,6 +108,7 @@ body {
 }
 
 .logo-icon { font-size: 1.5rem; }
+.logo-icon-img { width: 36px; height: 36px; border-radius: 6px; object-fit: cover; filter: drop-shadow(0 0 6px rgba(212, 160, 23, 0.5)); }
 
 .logo-text {
   font-family: 'Cinzel', serif;

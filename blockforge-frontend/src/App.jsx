@@ -74,7 +74,7 @@ function App() {
       <div className="bg-glow" />
       <header className="app-header">
         <div className="logo-group">
-          <div className="logo-icon">⚒️</div>
+          <img src="/logo.png" alt="BlockForge" className="logo-icon-img" />
           <h1 className="logo-text">BlockForge</h1>
         </div>
         <div className="header-actions">
