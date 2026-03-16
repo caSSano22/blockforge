@@ -1,7 +1,7 @@
 {
   "project_name": "BlockForge",
-  "repo_url": "",
-  "commit_sha": "",
+  "repo_url": "https://github.com/caSSano22/blockforge",
+  "commit_sha": "138fb90e3d1d1ec91aa86954562aacca99b8216c",
   "rollup_chain_id": "blockforge-1",
   "deployed_address": "0x58EF1E72E5A8C03D7EA107D65B8969AE061ADF6B",
   "vm": "move",
