@@ -4,7 +4,7 @@ import Game from './Game.jsx'
 import Heroes from './Heroes.jsx'
 import Arena from './Arena.jsx'
 import Tavern from './Tavern.jsx'
-import Leaderboard from './Leaderboard.jsx'
+import Quests from './Quests.jsx'
 
 const CHAIN_ID = import.meta.env.VITE_APPCHAIN_ID
 const RPC_URL = import.meta.env.VITE_INITIA_RPC_URL
@@ -17,7 +17,7 @@ const TABS = [
   { id: 'heroes', label: '🗡️ Heroes', component: Heroes },
   { id: 'arena', label: '⚔️ Arena', component: Arena },
   { id: 'tavern', label: '🏪 Tavern', component: Tavern },
-  { id: 'leaderboard', label: '🏆 Ranks', component: Leaderboard },
+  { id: 'quests', label: '📜 Quests', component: Quests },
 ]
 
 function App() {
